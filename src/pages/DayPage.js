@@ -1,5 +1,5 @@
 // pages/DayPage.js
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import "../App.css";
@@ -10,23 +10,27 @@ export default function DayPage() {
   const [newTitle, setNewTitle] = useState("");
   const [editingTaskId, setEditingTaskId] = useState(null);
   const [editingTitle, setEditingTitle] = useState("");
-  const [newSubTaskTitles, setNewSubTaskTitles] = useState({}); // taskId -> new subtask
+  const [newSubTaskTitles, setNewSubTaskTitles] = useState({});
   const [editingSubTaskId, setEditingSubTaskId] = useState(null);
   const [editingSubTaskTitle, setEditingSubTaskTitle] = useState("");
-  const [showSubTasks, setShowSubTasks] = useState({}); // taskId -> boolean
+  const [showSubTasks, setShowSubTasks] = useState({});
 
-  const fetchTasks = async () => {
+  // ✅ FIXED: wrapped in useCallback
+  const fetchTasks = useCallback(async () => {
     try {
-      const res = await axios.get(`http://127.0.0.1:8000/api/tasks/date/${date}`);
+      const res = await axios.get(
+        `http://127.0.0.1:8000/api/tasks/date/${date}`
+      );
       setTasks(res.data);
     } catch (err) {
       console.error("Error fetching tasks:", err);
     }
-  };
+  }, [date]);
 
+  // ✅ FIXED: dependency is fetchTasks
   useEffect(() => {
     fetchTasks();
-  }, [date]);
+  }, [fetchTasks]);
 
   // ----- Tasks CRUD -----
   const addTask = async () => {
