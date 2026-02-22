@@ -11,7 +11,7 @@ function MobileNavbar() {
     <div className="mobile-navbar">
       <div
         className={`nav-item ${location.pathname === "/" ? "active" : ""}`}
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/calendar")}
       >
         <FaHome />
         <span>Home</span>
@@ -26,7 +26,7 @@ function MobileNavbar() {
       </div>
 
       {/* CENTER PLUS BUTTON */}
-      <div className="nav-plus" onClick={() => navigate("/calendar")}>
+      <div className="nav-plus" onClick={() => navigate("/calendar-view")}>
         <FaPlus />
       </div>
 

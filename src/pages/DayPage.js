@@ -144,7 +144,7 @@ export default function DayPage() {
   return (
     <div className="day-container">
       <h1>Tasks for {date}</h1>
-      <Link to="/" className="back-link">Back to Calendar</Link>
+      <Link to="/calendar-view" className="back-link">Back to Calendar</Link>
 
       <div className="tasks-list">
         {tasks.map((task) => (
