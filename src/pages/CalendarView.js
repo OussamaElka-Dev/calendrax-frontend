@@ -12,6 +12,7 @@ export default function CalendarView() {
   const calendarRef = useRef(null);
 
   const [tasksByDate, setTasksByDate] = useState({});
+  const [animateToday, setAnimateToday] = useState(false);
 
   useEffect(() => {
     fetchTasks();
@@ -43,6 +44,19 @@ export default function CalendarView() {
     navigate(`/day/${info.dateStr}`);
   };
 
+  // ✅ TODAY BUTTON FUNCTION
+  const goToToday = () => {
+    const calendarApi = calendarRef.current.getApi();
+    calendarApi.today();
+
+    setAnimateToday(true);
+
+    setTimeout(() => {
+      setAnimateToday(false);
+    }, 1000);
+  };
+
+  // ✅ COLOR + ANIMATION LOGIC
   const dayCellClassNames = (arg) => {
     const year = arg.date.getFullYear();
     const month = String(arg.date.getMonth() + 1).padStart(2, "0");
@@ -51,30 +65,43 @@ export default function CalendarView() {
     const date = `${year}-${month}-${day}`;
     const tasks = tasksByDate[date] || [];
 
-    if (tasks.length === 0) return "";
+    const today = new Date();
+    const isToday =
+      today.getFullYear() === arg.date.getFullYear() &&
+      today.getMonth() === arg.date.getMonth() &&
+      today.getDate() === arg.date.getDate();
 
-    let totalSubtasks = 0;
-    let completedSubtasks = 0;
+    let baseClass = "";
 
-    tasks.forEach(task => {
-      if (task.sub_tasks && task.sub_tasks.length > 0) {
-        totalSubtasks += task.sub_tasks.length;
+    if (tasks.length > 0) {
+      let totalSubtasks = 0;
+      let completedSubtasks = 0;
 
-        task.sub_tasks.forEach(sub => {
-          if (sub.status === "done") completedSubtasks++;
-        });
-      } else {
-        totalSubtasks++;
-        if (task.status === "done") completedSubtasks++;
-      }
-    });
+      tasks.forEach(task => {
+        if (task.sub_tasks && task.sub_tasks.length > 0) {
+          totalSubtasks += task.sub_tasks.length;
+          task.sub_tasks.forEach(sub => {
+            if (sub.status === "done") completedSubtasks++;
+          });
+        } else {
+          totalSubtasks++;
+          if (task.status === "done") completedSubtasks++;
+        }
+      });
 
-    const percentage = (completedSubtasks / totalSubtasks) * 100;
+      const percentage = (completedSubtasks / totalSubtasks) * 100;
 
-    if (percentage === 100) return "day-green";
-    if (percentage >= 75) return "day-orange";
-    if (percentage >= 50) return "day-yellow";
-    return "day-red";
+      if (percentage === 100) baseClass = "day-green";
+      else if (percentage >= 75) baseClass = "day-orange";
+      else if (percentage >= 50) baseClass = "day-yellow";
+      else baseClass = "day-red";
+    }
+
+    if (isToday && animateToday) {
+      return `${baseClass} today-animate`;
+    }
+
+    return baseClass;
   };
 
   return (
@@ -89,11 +116,16 @@ export default function CalendarView() {
           headerToolbar={{
             left: "title",
             center: "",
-            right: "prev,next today"
+            right: "prev,next"
           }}
           dateClick={handleDateClick}
           dayCellClassNames={dayCellClassNames}
         />
+
+        {/* ✅ TODAY BUTTON */}
+        <button className="today-btn" onClick={goToToday}>
+          Today
+        </button>
       </div>
 
       <MobileNavbar />

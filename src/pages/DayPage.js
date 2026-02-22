@@ -1,4 +1,4 @@
-// pages/DayPage.js
+// pages/DayPage.js - ICONS ONLY VERSION (.js extension)
 import React, { useEffect, useState, useCallback } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
@@ -157,8 +157,16 @@ export default function DayPage() {
                   onChange={(e) => setEditingTitle(e.target.value)}
                   className="task-edit-input"
                 />
-                <button className="save" onClick={() => saveEdit(task)}>Save</button>
-                <button className="cancel" onClick={() => setEditingTaskId(null)}>Cancel</button>
+                <button className="save icon-btn" onClick={() => saveEdit(task)}>
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                  </svg>
+                </button>
+                <button className="cancel icon-btn" onClick={() => setEditingTaskId(null)}>
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                  </svg>
+                </button>
               </>
             ) : (
               <>
@@ -168,13 +176,23 @@ export default function DayPage() {
                 >
                   {task.title}
                 </span>
-                <button className="edit" onClick={() => startEditing(task)}>Edit</button>
-                <button className="delete" onClick={() => deleteTask(task.id)}>Delete</button>
+                <button className="edit icon-btn" onClick={() => startEditing(task)}>
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                  </svg>
+                </button>
+                <button className="delete icon-btn" onClick={() => deleteTask(task.id)}>
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                  </svg>
+                </button>
                 <button
-                  className="show-subtasks"
+                  className="show-subtasks icon-btn"
                   onClick={() => setShowSubTasks({ ...showSubTasks, [task.id]: !showSubTasks[task.id] })}
                 >
-                  {showSubTasks[task.id] ? "Hide Subtasks" : "Show Subtasks"}
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M7 11l5 5 5-5z"/>
+                  </svg>
                 </button>
               </>
             )}
@@ -192,8 +210,16 @@ export default function DayPage() {
                           className="subtask-input"
                         />
                         <div className="button-container">
-                          <button className="save" onClick={() => saveEditSubTask(sub)}>Save</button>
-                          <button className="cancel" onClick={() => setEditingSubTaskId(null)}>Cancel</button>
+                          <button className="save icon-btn" onClick={() => saveEditSubTask(sub)}>
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                            </svg>
+                          </button>
+                          <button className="cancel icon-btn" onClick={() => setEditingSubTaskId(null)}>
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                            </svg>
+                          </button>
                         </div>
                       </>
                     ) : (
@@ -205,8 +231,16 @@ export default function DayPage() {
                           {sub.title}
                         </span>
                         <div className="button-container">
-                          <button className="edit" onClick={() => startEditingSubTask(sub)}>Edit</button>
-                          <button className="delete" onClick={() => deleteSubTask(sub.id)}>Delete</button>
+                          <button className="edit icon-btn" onClick={() => startEditingSubTask(sub)}>
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                            </svg>
+                          </button>
+                          <button className="delete icon-btn" onClick={() => deleteSubTask(sub.id)}>
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                            </svg>
+                          </button>
                         </div>
                       </>
                     )}
@@ -221,7 +255,11 @@ export default function DayPage() {
                     onChange={(e) => setNewSubTaskTitles({ ...newSubTaskTitles, [task.id]: e.target.value })}
                     placeholder="New sub-task"
                   />
-                  <button className="add" onClick={() => addSubTask(task.id)}>Add</button>
+                  <button className="add icon-btn" onClick={() => addSubTask(task.id)}>
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                    </svg>
+                  </button>
                 </div>
               </div>
             )}
@@ -237,7 +275,11 @@ export default function DayPage() {
           onChange={(e) => setNewTitle(e.target.value)}
           placeholder="New Task"
         />
-        <button className="add" onClick={addTask}>Add Task</button>
+        <button className="add icon-btn" onClick={addTask}>
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+          </svg>
+        </button>
       </div>
     </div>
   );
