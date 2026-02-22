@@ -243,12 +243,6 @@ button.add:hover {
   background: #10b981; /* darker green on hover */
   box-shadow: 0 6px 12px rgba(16, 185, 129, 0.4);
 }
-/* Make frame transparent so glow shows */
-.fc-daygrid-day-frame {
-  background: transparent !important;
-  position: relative;
-  z-index: 2;
-}
 
 /* Base calendar cell */
 .fc-daygrid-day {
@@ -422,6 +416,7 @@ button.add:hover {
   font-size: 12px;
   color: #64748b;
 }
+
 /* =============================== */
 /* ===== FULLCALENDAR HEADER ===== */
 /* =============================== */
@@ -489,6 +484,7 @@ button.add:hover {
   align-items: center;
   gap: 10px;
 }
+
 /* ============================= */
 /* ===== SOFT RED TODAY EFFECT == */
 /* ============================= */
@@ -511,5 +507,118 @@ button.add:hover {
   }
   100% {
     box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+/* =============================== */
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .day-container {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  .tasks-list {
+    gap: 10px;
+  }
+
+  .task {
+    padding: 15px;
+  }
+
+  .task span.task-title {
+    font-size: 16px;
+  }
+
+  .add-subtask input,
+  .add-task input {
+    font-size: 14px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .calendar-container {
+    padding: 15px;
+  }
+
+  .fc .fc-toolbar-title {
+    font-size: 20px;
+  }
+
+  .fc-button {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+
+  .fc-daygrid-day {
+    font-size: 12px;
+  }
+
+  .kpi-value {
+    font-size: 24px;
+  }
+
+  .kpi-label,
+  .summary-number {
+    font-size: 14px;
+  }
+}
+
+/* Smaller than 480px */
+@media (max-width: 480px) {
+  .day-container {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+
+  .tasks-list {
+    gap: 5px;
+  }
+
+  .task {
+    padding: 12px;
+  }
+
+  .task span.task-title {
+    font-size: 14px;
+  }
+
+  .add-subtask input,
+  .add-task input {
+    font-size: 12px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fc .fc-toolbar-title {
+    font-size: 18px;
+  }
+
+  .fc-button {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+
+  .fc-daygrid-day {
+    font-size: 10px;
+  }
+
+  .kpi-value {
+    font-size: 20px;
+  }
+
+  .kpi-label,
+  .summary-number {
+    font-size: 12px;
   }
 }
