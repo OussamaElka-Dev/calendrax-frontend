@@ -12,7 +12,6 @@ export default function CalendarView() {
   const calendarRef = useRef(null);
 
   const [tasksByDate, setTasksByDate] = useState({});
-  const [selectedMonth, setSelectedMonth] = useState(new Date());
 
   useEffect(() => {
     fetchTasks();
@@ -42,10 +41,6 @@ export default function CalendarView() {
 
   const handleDateClick = (info) => {
     navigate(`/day/${info.dateStr}`);
-  };
-
-  const handleDatesSet = (arg) => {
-    setSelectedMonth(arg.view.currentStart);
   };
 
   const dayCellClassNames = (arg) => {
@@ -97,7 +92,6 @@ export default function CalendarView() {
             right: "prev,next today"
           }}
           dateClick={handleDateClick}
-          datesSet={handleDatesSet}
           dayCellClassNames={dayCellClassNames}
         />
       </div>
