@@ -22,7 +22,7 @@ export default function CalendarPage() {
 
   const fetchTasks = async () => {
     try {
-      const res = await axios.get("http://127.0.0.1:8000/api/tasks");
+      const res = await axios.get("https://test.vekoin.com/api/tasks");
 
       const grouped = {};
 

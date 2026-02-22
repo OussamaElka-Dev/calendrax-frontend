@@ -19,7 +19,7 @@ export default function DayPage() {
   const fetchTasks = useCallback(async () => {
     try {
       const res = await axios.get(
-        `http://127.0.0.1:8000/api/tasks/date/${date}`
+        `https://test.vekoin.com/api/tasks/date/${date}`
       );
       setTasks(res.data);
     } catch (err) {
@@ -36,7 +36,7 @@ export default function DayPage() {
   const addTask = async () => {
     if (!newTitle) return;
     try {
-      await axios.post("http://127.0.0.1:8000/api/tasks", {
+      await axios.post("https://test.vekoin.com/api/tasks", {
         title: newTitle,
         task_date: date,
         status: "pending",
@@ -50,7 +50,7 @@ export default function DayPage() {
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`http://127.0.0.1:8000/api/tasks/${id}`);
+      await axios.delete(`https://test.vekoin.com/api/tasks/${id}`);
       fetchTasks();
     } catch (err) {
       console.error("Error deleting task:", err);
@@ -59,7 +59,7 @@ export default function DayPage() {
 
   const toggleDone = async (task) => {
     try {
-      await axios.put(`http://127.0.0.1:8000/api/tasks/${task.id}`, {
+      await axios.put(`https://test.vekoin.com/api/tasks/${task.id}`, {
         ...task,
         status: task.status === "pending" ? "done" : "pending",
       });
@@ -76,7 +76,7 @@ export default function DayPage() {
 
   const saveEdit = async (task) => {
     try {
-      await axios.put(`http://127.0.0.1:8000/api/tasks/${task.id}`, {
+      await axios.put(`https://test.vekoin.com/api/tasks/${task.id}`, {
         ...task,
         title: editingTitle,
       });
@@ -93,7 +93,7 @@ export default function DayPage() {
     const title = newSubTaskTitles[taskId];
     if (!title) return;
     try {
-      await axios.post(`http://127.0.0.1:8000/api/tasks/${taskId}/subtasks`, { title });
+      await axios.post(`https://test.vekoin.com/api/tasks/${taskId}/subtasks`, { title });
       setNewSubTaskTitles({ ...newSubTaskTitles, [taskId]: "" });
       fetchTasks();
     } catch (err) {
@@ -103,7 +103,7 @@ export default function DayPage() {
 
   const toggleSubTaskDone = async (subTask) => {
     try {
-      await axios.put(`http://127.0.0.1:8000/api/subtasks/${subTask.id}`, {
+      await axios.put(`https://test.vekoin.com/api/subtasks/${subTask.id}`, {
         ...subTask,
         status: subTask.status === "pending" ? "done" : "pending",
       });
@@ -115,7 +115,7 @@ export default function DayPage() {
 
   const deleteSubTask = async (subTaskId) => {
     try {
-      await axios.delete(`http://127.0.0.1:8000/api/subtasks/${subTaskId}`);
+      await axios.delete(`https://test.vekoin.com/api/subtasks/${subTaskId}`);
       fetchTasks();
     } catch (err) {
       console.error("Error deleting sub-task:", err);
@@ -129,7 +129,7 @@ export default function DayPage() {
 
   const saveEditSubTask = async (sub) => {
     try {
-      await axios.put(`http://127.0.0.1:8000/api/subtasks/${sub.id}`, {
+      await axios.put(`https://test.vekoin.com/api/subtasks/${sub.id}`, {
         ...sub,
         title: editingSubTaskTitle,
       });
